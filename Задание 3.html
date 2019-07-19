@@ -1,0 +1,110 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Задание 3</title>
+    </head>
+    <body>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script> 
+            var m = [
+            {
+            text: "Животные",
+            childs: [
+            {
+            	text: "Млекопитающие",
+            	childs: [
+            	{
+            		text: "Коровы",
+            		childs: []
+            	},
+            	{
+            		text: "Ослы",
+            		childs: []
+            	},
+            	{
+            		text: "Собаки",
+            		childs: []
+            	},
+            	{
+            		text: "Тигры",
+            		childs: []
+            	}
+            	]
+            },
+            {
+            	text: "Другие",
+            	childs: [
+            	{
+            		text: "Змеи",
+            		childs: []
+            	},
+            	{
+            		text: "Птицы",
+            		childs: []
+            	},
+            	{
+            		text: "Ящерицы",
+            		childs: []
+            	}
+            	]
+            }
+            ]
+            },
+            {
+            text: "Рыбы",
+            childs: [
+            {
+            	text: "Аквариумные",
+            	childs: [
+            	{
+            		text: "Гуппи",
+            		childs: []
+            	},
+            	{
+            		text: "Скалярии",
+            		childs: []
+            	}
+            	]
+            },
+            {
+            	text: "Морские",
+            	childs: [
+            	{
+            		text: "Морская форель",
+            		childs: []
+            	}
+            	]
+            }
+            ]
+            }
+            ];
+             
+            function addItem(item, par)
+			{
+               if (item.length > 0)
+			   {
+                   par.append("<ul></ul>");
+                   for (var i = 0; i < item.length; i++)
+				   {
+                       par.children("ul").append("<li><span>" + item[i].text + "</span></li>");
+                       addItem(item[i].childs, par.children("ul").children("li:last-child"))
+                    }
+                }
+            }
+             
+            addItem(m, $("body"));
+            
+            $('li').each(function(k)
+            {
+               $(this).children('span').after('<span class=li-count id="counter' + k + '"></span>');
+               $('#counter' + k).html($(this).find('li').length != 0 ? ' [' + $(this).find('li').length + ']' : '');
+            })
+             
+            $('LI').click(function()
+            {
+               $(this).children().not('span').slideToggle();
+               event.stopPropagation();
+            })      
+        </script>
+    </body>
+</html>
